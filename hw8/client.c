@@ -6,7 +6,7 @@
 #include <fcntl.h>
 #include <time.h>
 
-#define SHM_NAME "/akos-hw8-shm" // Имя объекта разделяемой памяти в системе POSIX
+#define SHM_NAME "/my-shm" // Имя объекта разделяемой памяти в системе POSIX
 
 // Структура разделяемой памяти
 typedef struct {
