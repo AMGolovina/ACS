@@ -91,4 +91,7 @@ printf("WRITER %d | PID=%d : idx=%d old=%d new=%d\n", id, getpid(), idx, old, ne
 ### 6. Удаление семафоров и разделяемой памяти по ее завершению:
 - неименованные семафоры: `sem_destroy`;
 - разделяемая память: `munmap` + `close` + `shm_unlink`.
+### 7. Результаты работы программы:
+![2025-11-20 18 12 07](https://github.com/user-attachments/assets/b29ea845-76c6-4545-9bb9-77257c625f00)
 
+---
