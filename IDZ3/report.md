@@ -95,3 +95,4 @@ printf("WRITER %d | PID=%d : idx=%d old=%d new=%d\n", id, getpid(), idx, old, ne
 ![2025-11-20 18 12 07](https://github.com/user-attachments/assets/b29ea845-76c6-4545-9bb9-77257c625f00)
 
 ---
+## 
