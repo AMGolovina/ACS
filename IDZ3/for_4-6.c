@@ -78,6 +78,15 @@ void reader_process(int id) {
     _exit(0); // Когда флаг 1, завершаем процесс
 }
 
+// Сортировка по возрастанию(непротиворечивое состояние для массива)
+int int_cmp(const void *a, const void *b) {
+    int ia = *(const int *)a;
+    int ib = *(const int *)b;
+    if (ia < ib) return -1;
+    if (ia > ib) return 1;
+    return 0;
+}
+
 // Процесс-писатель
 void writer_process(int id) {
     srand(getpid()); // Инициализация PID
@@ -91,6 +100,7 @@ void writer_process(int id) {
         int old = shared->db[idx]; // Запоминаем старое значение для индекса
         int new_val = (rand() % 1000) + 1; // Генерируем новое значение от 1 до 1000
         shared->db[idx] = new_val; // Записываем его в массив
+        qsort(shared->db, 20, sizeof(int), int_cmp); // Переход в новое непротиворечивое состояние
 
         // Вывод результата
         printf("WRITER %d | PID=%d : idx=%d old=%d new=%d\n",
@@ -110,6 +120,10 @@ void cleanup_parent(void) {
         // Удаление неименованных семафоров
         sem_destroy(&shared->mutex);
         sem_destroy(&shared->rw_mutex);
+
+        // Удаление shared memory
+        munmap(shared, sizeof(shared_t));
+        shared = NULL;
     }
 
     if (shm_fd != -1) {
