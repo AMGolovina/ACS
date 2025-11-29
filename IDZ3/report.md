@@ -90,7 +90,7 @@ printf("WRITER %d | PID=%d : idx=%d old=%d new=%d\n", id, getpid(), idx, old, ne
 - неименованные семафоры: `sem_destroy`;
 - разделяемая память: `close` + `shm_unlink`.
 ### 7. Результаты работы программы:
-![2025-11-20 18 12 07](https://github.com/user-attachments/assets/b29ea845-76c6-4545-9bb9-77257c625f00)
+<img width="571" height="372" alt="Снимок экрана 2025-11-29 в 21 53 42" src="https://github.com/user-attachments/assets/c5f4d418-a2d4-4e3d-9b1a-3cb7a588635f" />
 
 ---
 ## 
