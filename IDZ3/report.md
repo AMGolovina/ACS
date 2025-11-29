@@ -43,7 +43,7 @@
 
 - в `reader_process` читатель читает `shared->db[idx]` и использует общие поля `read_count`, `terminate`.
 ```
-int idx = rand() % DB_SIZE;
+int idx = rand() % 20;
 int value = shared->db[idx];
 ...
 shared->read_count++;
@@ -52,13 +52,13 @@ shared->read_count--;
 ```
 - в `writer_process` писатель читает и меняет элементы массива `shared->db` в той же общей памяти.
 ```
-int idx = rand() % DB_SIZE;
+int idx = rand() % 20;
 int old = shared->db[idx];
 int new_val = (rand() % 1000) + 1;
 shared->db[idx] = new_val;
 ```
 ### 4. Завершение программы:
-В условии нет как такогового требования к завершению программы, поэтому она завершает в консоли при нажатии `Ctrl+C`.
+Основной сценарий завершения - по Ctrl+C
 ### 5. Вывод в общий поток:
 - в `reader_process`:
 ```
@@ -88,7 +88,7 @@ printf("WRITER %d | PID=%d : idx=%d old=%d new=%d\n", id, getpid(), idx, old, ne
 `new_val` - новое значение элемента массива.
 ### 6. Удаление семафоров и разделяемой памяти по ее завершению:
 - неименованные семафоры: `sem_destroy`;
-- разделяемая память: `munmap` + `close` + `shm_unlink`.
+- разделяемая память: `close` + `shm_unlink`.
 ### 7. Результаты работы программы:
 ![2025-11-20 18 12 07](https://github.com/user-attachments/assets/b29ea845-76c6-4545-9bb9-77257c625f00)
 
