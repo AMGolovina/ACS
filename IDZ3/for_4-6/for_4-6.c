@@ -152,7 +152,7 @@ int main(void) {
         perror("shm_open");
         exit(1);
     }
-    if (ftruncate(shm_fd, sizeof(shared_t)) == -1) {
+    if (ftruncate(shm_fd, sizeof(shared_t)) == -1) { // Устанавливаем размер объекта
         perror("ftruncate");
         shm_unlink(shar_object);
         exit(1);
