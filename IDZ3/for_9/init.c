@@ -8,7 +8,7 @@
 const char *shm_name       = "/posix-shar-object2"; // Имя объекта разделяемой памяти
 const char *sem_mutex_name = "/rw_mutex_sem_named"; // Имя семафора для счётчика читателей
 const char *sem_rw_name    = "/rw_db_sem_named"; // Имя семафора для доступа к массиву
-const char *fifo_name      = "/tmp/idz_observer_fifo"; // Имя очереди для наблюдателя
+const char *fifo_name      = "/tmp/idz_observer_fifo"; // Имя канала для наблюдателя
 
 // Структура, лежащая в POSIX shared memory
 typedef struct {
@@ -28,7 +28,7 @@ int main(void) {
     sem_unlink(sem_mutex_name);
     sem_unlink(sem_rw_name);
 
-    mkfifo(fifo_name, 0666); // Создаем очередь
+    mkfifo(fifo_name, 0666); // Создаем fifo
 
     // Создаем/открываем объект
     shm_fd = shm_open(shm_name, O_CREAT | O_RDWR, 0666);
