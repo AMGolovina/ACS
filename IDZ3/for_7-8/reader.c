@@ -82,29 +82,30 @@ int main(void) {
     // Основной цикл работы читателя
     while (!shared->terminate) {
         // Блокируем mutex, изменяем read_count
-        sem_wait(&shared->mutex);
+        sem_wait(mutex);
         shared->read_count++;
         if (shared->read_count == 1) {
-            sem_wait(&shared->rw_mutex); // Первый читатель блокирует писателей
+            sem_wait(rw_mutex); // Первый читатель блокирует писателей
         }
-        sem_post(&shared->mutex); // Освобождаем mutex, чтобы другие читатели могли менять
+        sem_post(mutex); // Освобождаем mutex, чтобы другие читатели могли менять
 
         int idx = rand() % 20; // Выбираем случайно число из быза данных
         int value = shared->db[idx]; // Считываем это число из массива
         int fib_val = fib(value % 20); // Вычисляем для него число Фибоначи
 
         // Вывод результата
-        printf("READER %d | PID=%d : idx=%d value=%d fib=%d\n",
-               id, getpid(), idx, value, fib_val);
+        printf("READER | PID=%d : idx=%d value=%d fib=%d\n",
+               getpid(), idx, value, fib_val);
+
 
         // Блокируем mutex, уменьшаем read_count
-        sem_wait(&shared->mutex);
+        sem_wait(mutex);
         shared->read_count--;
         // Если читатель последний, то открываем доступ писателям
         if (shared->read_count == 0) {
-            sem_post(&shared->rw_mutex);
+            sem_post(rw_mutex);
         }
-        sem_post(&shared->mutex); // Освобождаем mutex
+        sem_post(mutex); // Освобождаем mutex
 
         sleep(1); // Пауза
     }
@@ -118,3 +119,4 @@ int main(void) {
 
     return 0;
 }
+
