@@ -16,12 +16,12 @@ typedef struct {
     int db[20]; // Массив целых положительных чисел(база данных)
     int read_count; // Число читателей
     int terminate; // Флаг завершения 
-    sem_t mutex; // семафор для read_count
-    sem_t rw_mutex; // семафор для доступа к базе данных
+    sem_t mutex; // Семафор для read_count
+    sem_t rw_mutex; // Семафор для доступа к базе данных
 } shared_t;
 
-shared_t *shared = NULL; // указатель на разделяемую память
-int shm_fd = -1; // дескриптор shared memory
+shared_t *shared = NULL; // Указатель на разделяемую память
+int shm_fd = -1; // Дескриптор shared memory
 
 // Флаг завершения
 void parent_sigint(int signo) {
