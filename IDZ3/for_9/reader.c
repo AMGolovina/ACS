@@ -10,7 +10,7 @@
 const char *shm_name       = "/posix-shar-object2"; // Имя объекта разделяемой памяти
 const char *sem_mutex_name = "/rw_mutex_sem_named"; // Имя семафора для счётчика читателей
 const char *sem_rw_name    = "/rw_db_sem_named"; // Имя семафора для доступа к массиву
-const char *fifo_name      = "/tmp/idz_observer_fifo"; // Очередь для отправки сообщений наблюдателю
+const char *fifo_name      = "/tmp/idz_observer_fifo"; // Имя канала для отправки сообщений наблюдателю
 
 // Структура, лежащая в POSIX shared memory
 typedef struct {
@@ -76,7 +76,7 @@ int main(void) {
         exit(1);
     }
 
-    // открываем FIFO для записи в наблюдатель
+    // Открываем FIFO для записи в наблюдатель
     int fifo_fd = open(fifo_name, O_WRONLY);
     if (fifo_fd == -1) {
         perror("open fifo");
@@ -104,7 +104,7 @@ int main(void) {
         printf("READER | PID=%d : idx=%d value=%d fib=%d\n",
                getpid(), idx, value, fib_val);
 
-        // дублируем сообщение в именованный канал для observer
+        // Дублируем сообщение в именованный канал для observer
         char buf[128];
         int len = snprintf(buf, sizeof(buf),
                            "READER | PID=%d : idx=%d value=%d fib=%d\n",
