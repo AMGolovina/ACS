@@ -21,7 +21,7 @@ int main(void) {
     // Создаем очередь
     mkfifo(fifo_name, 0666);
 
-    // Открываем очередь для чтения
+    // Открываем канал для чтения
     int fd = open(fifo_name, O_RDONLY);
     if (fd == -1) {
         perror("open fifo");
@@ -34,7 +34,7 @@ int main(void) {
     char buf[256]; // Буфер, куда читаются данные
     // Основной цикл наблюдателя
     while (!stop) {
-        ssize_t n = read(fd, buf, sizeof(buf) - 1); // Читаем из очереди до 255 байт
+        ssize_t n = read(fd, buf, sizeof(buf) - 1); // Читаем из fifo до 255 байт
         if (n > 0) {
             buf[n] = '\0';      // Завершаем строку
             printf("[OBSERVE] %s", buf); // Выводим то, что прислали
@@ -46,6 +46,6 @@ int main(void) {
         }
     }
 
-    close(fd); // Закрываем файловый дескриптор очереди
+    close(fd); // Закрываем файловый дескриптор fifo
     return 0;
 }
