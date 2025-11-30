@@ -136,3 +136,13 @@ gcc writer.c   -o writer   -pthread
 4. Можно еще пооткрывать терминалов, собрать в них три файла и дальше запустить еще процессов читателей и писателей.
 
 Результаты работы для `init.c`:
+
+<img width="571" height="373" alt="Снимок экрана 2025-11-30 в 15 17 18" src="https://github.com/user-attachments/assets/a72de34c-741d-4fec-985a-4c6b2beb75d6" />
+
+Результаты работы для двух процессов-писателей:
+<img width="1140" height="374" alt="Снимок экрана 2025-11-30 в 15 20 06" src="https://github.com/user-attachments/assets/9f6277c2-aac4-4883-aaa8-d80c2dc40b6c" />
+Результаты работы для двух процессов-читателей:
+<img width="1141" height="373" alt="Снимок экрана 2025-11-30 в 15 20 15" src="https://github.com/user-attachments/assets/99e332d6-7b5f-42c7-898f-e4767aa15019" />
+
+---
+## на 9 баллов
