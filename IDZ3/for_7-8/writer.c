@@ -91,7 +91,7 @@ int main(void) {
         printf("WRITER | PID=%d : idx=%d old=%d new=%d\n",
                getpid(), idx, old, new_val);
 
-        sem_post(&shared->rw_mutex); // Освобожадаем rw_mutex
+        sem_post(rw_mutex); // Освобожадаем rw_mutex
 
         sleep(2);  // Пауза
     }
